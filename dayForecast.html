@@ -1,0 +1,13 @@
+<ul class="list-group">
+	<li class="list-group-item list-group-item-action" ng-repeat="day in days">
+		<div>
+			<p>{{ convertToDate({ dayTime: day.dt }) | date : 'dd.MM.yyyy' }}</p>
+			<p>Dan: {{ day.temp.day + "&degC" }}</p>
+			<p>Noć: {{ day.temp.eve + "&degC" }}</p>
+			<p>Vrijeme: {{ day.weather['0'].description }}</p>
+		</div>
+		<div class="wImage">
+			<img ng-src="http://openweathermap.org/img/w/{{ day.weather['0'].icon }}.png">
+		</div>
+	</li>
+</ul>

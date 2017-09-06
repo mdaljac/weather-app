@@ -1,0 +1,51 @@
+.row{
+	width: 100%;
+}
+
+form{
+	width: 70%;
+	margin: 10px auto;
+}
+
+.form-inline .form-control{
+	width: 60%;
+}
+
+input[type="submit"]{
+	margin-left: 10px;
+}
+
+day-forecast{
+	width: 100%;
+}
+
+.list-group{
+	width: 100%;
+}
+.list-group-item{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.wImage{
+	margin-right: 45%;
+}
+.wImage img{
+	width: 100px;
+	height: auto;
+}
+
+a.cnt.active{
+	background-color: grey;
+	box-shadow: none;
+	outline: none;
+	border: none;
+}
+
+.mySelect{
+	border: none;
+	border-bottom: 1px solid rgba(0,0,0,0.5);
+	outline: none;
+	font-size: 1.1rem;
+	width: 10em;
+}
