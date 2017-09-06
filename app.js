@@ -108,7 +108,7 @@ weatherApp.controller("forecastController", ["$scope", "$http", "$filter", "city
 
 		$scope.cnt = num || 2;
 
-		$http.get("http://api.openweathermap.org/data/2.5/forecast/daily?q=" + $scope.cityName + "&units=metric&lang=hr&cnt=" + $scope.cnt + "&APPID=2b6f7645cb308393eb84ed6b1517b425")
+		$http.get("https://api.openweathermap.org/data/2.5/forecast/daily?q=" + $scope.cityName + "&units=metric&lang=hr&cnt=" + $scope.cnt + "&APPID=2b6f7645cb308393eb84ed6b1517b425")
 		.then(function(result){
 
 			$scope.days = result.data.list;
