@@ -62,6 +62,7 @@ weatherApp.controller("mainController", ["$scope", "$location", "city", function
 
 weatherApp.controller("forecastController", ["$scope", "$resource", "$sce", "$filter", "city", function($scope, $resource, $sce, $filter, city){
 
+	$scope.isLoading = true;
 	$scope.cityName = city.name;
 	$scope.data = [[], []];
 	$scope.labels = [];
@@ -101,7 +102,6 @@ weatherApp.controller("forecastController", ["$scope", "$resource", "$sce", "$fi
 
 	$scope.getData = function(num, elem = 'undefined'){
 
-
 		if (elem !== 'undefined'){
 			if (angular.element(elem.$event.target).hasClass('active')) return false;
 		}
@@ -109,6 +109,7 @@ weatherApp.controller("forecastController", ["$scope", "$resource", "$sce", "$fi
 		if (num) {
 			$scope.labels = [];
 			$scope.data = [[], []];
+			$scope.isLoading = true;
 		}
 
 		$scope.cnt = num || 2;
@@ -121,15 +122,13 @@ weatherApp.controller("forecastController", ["$scope", "$resource", "$sce", "$fi
 
 		weatherData.$promise
 			.then(function(result){
-
+				$scope.isLoading = false;
 				$scope.days = result.list;
 				angular.forEach($scope.days, function(day){
 					$scope.data[0].push(day.temp.day);
 					$scope.data[1].push(day.temp.eve);
 					$scope.labels.push($filter('date')($scope.convertToDate(day.dt), "dd.MM.yyyy"));
-				});
-
-
+				})
 			}, function(error, status){
 				console.log(error.data.message);
 			});

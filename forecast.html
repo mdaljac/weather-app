@@ -5,20 +5,23 @@
 		<a href="#!forecast" class="btn btn-info btn-lg cnt mx-3" ng-click="getData(5, $locals)" ng-class="{ active : cnt === 5 }" >5 dana</a>
 		<a href="#!forecast" class="btn btn-info btn-lg cnt" ng-click="getData(7, $locals)" ng-class="{ active : cnt === 7 }" >7 dana</a>
 
-
-		
 		<select class="mySelect ml-3" ng-model="myDay" ng-options="myDay.label for myDay in futureDays" ng-change="getData(myDay.cnt)"></select>
 
-
-		<div class="container my-5">
+		<div class="container my-5 chart-wrapper">
 			<canvas id="weatherMap" class="chart chart-line" chart-data="data" chart-labels="labels" 
 				chart-series="series" chart-options="options" chart-colors="colors" chart-dataset-override="datasetOverride" chart-click="onClick"
 				width="400px" height="auto">
 			</canvas>
+			<div id="spinner" ng-if="isLoading">
+				<div class="sk-folding-cube">
+				  <div class="sk-cube1 sk-cube"></div>
+				  <div class="sk-cube2 sk-cube"></div>
+				  <div class="sk-cube4 sk-cube"></div>
+				  <div class="sk-cube3 sk-cube"></div>
+				</div>
+			</div>
 		</div>
-		
 
-		
 		<day-forecast days="days" convert-to-date="convertToDate(dayTime)"></day-forecast>
 	</div>
 </div>
