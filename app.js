@@ -1,10 +1,10 @@
 //APIKEY: 2b6f7645cb308393eb84ed6b1517b425
 
-var weatherApp = angular.module("weatherApp", ['ngRoute', 'ngResource', 'chart.js']);
+var weatherApp = angular.module("weatherApp", ['ngRoute', 'ngSanitize', 'ngResource', 'chart.js']);
 
 //ROUTES
 
-weatherApp.config(function($routeProvider, ChartJsProvider){
+weatherApp.config(function($routeProvider, $sceDelegateProvider, ChartJsProvider){
 
 	$routeProvider
 	.when("/", {
@@ -25,6 +25,13 @@ weatherApp.config(function($routeProvider, ChartJsProvider){
 		},
 		chartColors: ['rgb(255,0,0)', 'rgb(0,0,255)']
 	});
+
+	$sceDelegateProvider.resourceUrlWhitelist([
+
+		'self',
+		'http://api.openweathermap.org/data/2.5/forecast/daily'
+
+	]);
 
 });
 
@@ -55,7 +62,7 @@ weatherApp.controller("mainController", ["$scope", "$location", "city", function
 }]);
 
 
-weatherApp.controller("forecastController", ["$scope", "$http", "$filter", "city", function($scope, $resource, $filter, city){
+weatherApp.controller("forecastController", ["$scope", "$resource", "$sce", "$filter", "city", function($scope, $resource, $sce, $filter, city){
 
 	$scope.cityName = city.name;
 	$scope.data = [[], []];
@@ -108,9 +115,11 @@ weatherApp.controller("forecastController", ["$scope", "$http", "$filter", "city
 
 		$scope.cnt = num || 2;
 
-		var weatherData = $resource("http://api.openweathermap.org/data/2.5/forecast/daily",
-									{ q:  $scope.cityName, units: 'metric', lang: 'hr', cnt: $scope.cnt, APPID: '2b6f7645cb308393eb84ed6b1517b425' },
-									{ get: { method: 'GET' } });
+		var wResource = $resource("http://api.openweathermap.org/data/2.5/forecast/daily",
+									{}, { get : { method: "GET" } } );
+
+		var weatherData = wResource.get({ q : $scope.cityName, cnt : $scope.cnt, APPID : "2b6f7645cb308393eb84ed6b1517b425" });
+
 
 		console.log(weatherData);
 
