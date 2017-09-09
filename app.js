@@ -29,7 +29,7 @@ weatherApp.config(function($routeProvider, $sceDelegateProvider, ChartJsProvider
 	$sceDelegateProvider.resourceUrlWhitelist([
 
 		'self',
-		'http://api.openweathermap.org/data/2.5/forecast/daily'
+		'https://api.openweathermap.org/data/2.5/forecast/daily'
 
 	]);
 
@@ -115,7 +115,7 @@ weatherApp.controller("forecastController", ["$scope", "$resource", "$sce", "$fi
 
 		$scope.cnt = num || 2;
 
-		var wResource = $resource("http://api.openweathermap.org/data/2.5/forecast/daily?units=metric&lang=hr",
+		var wResource = $resource("https://api.openweathermap.org/data/2.5/forecast/daily?units=metric&lang=hr",
 									{}, { get : { method: "GET" } } );
 
 		var weatherData = wResource.get({ q : $scope.cityName, cnt : $scope.cnt, APPID : "2b6f7645cb308393eb84ed6b1517b425" });
