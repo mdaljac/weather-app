@@ -115,29 +115,26 @@ weatherApp.controller("forecastController", ["$scope", "$resource", "$sce", "$fi
 
 		$scope.cnt = num || 2;
 
-		var wResource = $resource("http://api.openweathermap.org/data/2.5/forecast/daily",
+		var wResource = $resource("http://api.openweathermap.org/data/2.5/forecast/daily?units=metric&lang=hr",
 									{}, { get : { method: "GET" } } );
 
 		var weatherData = wResource.get({ q : $scope.cityName, cnt : $scope.cnt, APPID : "2b6f7645cb308393eb84ed6b1517b425" });
 
 
-		console.log(weatherData);
+		weatherData.$promise
+			.then(function(result){
+
+				$scope.days = result.list;
+				angular.forEach($scope.days, function(day){
+					$scope.data[0].push(day.temp.day);
+					$scope.data[1].push(day.temp.eve);
+					$scope.labels.push($filter('date')($scope.convertToDate(day.dt), "dd.MM.yyyy"));
+				});
 
 
-		/*$http.get("https://api.openweathermap.org/data/2.5/forecast/daily?q=" + $scope.cityName + "&units=metric&lang=hr&cnt=" + $scope.cnt + "&APPID=2b6f7645cb308393eb84ed6b1517b425")
-		.then(function(result){
-
-			$scope.days = result.data.list;
-			angular.forEach($scope.days, function(day){
-				$scope.data[0].push(day.temp.day);
-				$scope.data[1].push(day.temp.eve);
-				$scope.labels.push($filter('date')($scope.convertToDate(day.dt), "dd.MM.yyyy"));
+			}, function(error, status){
+				console.log(error.data.message);
 			});
-
-
-		}, function(error, status){
-			console.log(error);
-		});*/
 	};
 
 }]);
