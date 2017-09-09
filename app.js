@@ -40,7 +40,7 @@ weatherApp.config(function($routeProvider, $sceDelegateProvider, ChartJsProvider
 
 weatherApp.service("city", function(){
 
-	this.name = "Petrinja";
+	this.name = "";
 
 });
 
@@ -49,11 +49,9 @@ weatherApp.service("city", function(){
 
 weatherApp.controller("mainController", ["$scope", "$location", "city", function($scope, $location, city){
 
-	$scope.cityName = city.name;
+	$scope.cityName = "";
 	$scope.$watch("cityName", function(){
-
 		city.name = $scope.cityName;
-
 	});
 	$scope.submit = function(){
 		$location.path("/forecast");
