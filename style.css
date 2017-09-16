@@ -1,3 +1,7 @@
+html{
+	font-size: 16px;
+}
+
 .row{
 	width: 100%;
 	position: relative;
@@ -22,14 +26,16 @@ day-forecast{
 
 .list-group{
 	width: 100%;
+	margin: 1em 1em;
 }
 .list-group-item{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	font-size: 1.2rem;
 }
 .wImage{
-	margin-right: 45%;
+	margin-right: 35%;
 }
 .wImage img{
 	width: 100px;
@@ -41,12 +47,16 @@ a.cnt.active{
 	outline: none;
 	border: none;
 }
+a.cnt:nth-of-type(2){
+	margin: 0 0.5em;
+}
 .mySelect{
 	border: none;
 	border-bottom: 1px solid rgba(0,0,0,0.5);
 	outline: none;
 	font-size: 1.1rem;
-	width: 10em;
+	width: 8em;
+	padding: 0.2em;
 }
 .chart-wrapper{
 	position: relative;
@@ -58,4 +68,51 @@ a.cnt.active{
 	top: 0;
 	display: flex;
 	align-items: center;
+}
+
+
+@media screen and (max-width: 580px){
+	.mySelect{
+		display: none;
+	}
+	a.cnt{
+		width: 70%;
+		margin: 0.5em auto;
+	}
+	a.cnt:nth-of-type(2){
+		margin: 0 auto;
+	}
+	.wImage{
+		margin-right: 25%;
+	}
+	.submenu{
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 530px){
+	.form-inline .form-control, input[type="submit"]{
+		width: 100%;
+		margin: 0.5em auto;
+		padding: 1em;
+		font-size: 1.2em;
+	}
+}
+
+@media screen and (max-width: 450px){
+	html{
+		font-size: 12px;
+	}
+	.form-inline .form-control, input[type="submit"]{
+		font-size: 1.4em;
+	}
+	.list-group-item{
+		font-size: 1.3rem;
+	}
+	.wImage{
+		margin-right: 15%;
+	}
+	.wImage img{
+		width: 80px;
+	}
 }
