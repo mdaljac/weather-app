@@ -60,7 +60,7 @@ weatherApp.controller("mainController", ["$scope", "$location", "city", function
 }]);
 
 
-weatherApp.controller("forecastController", ["$scope", "$resource", "$sce", "$filter", "city", function($scope, $resource, $sce, $filter, city){
+weatherApp.controller("forecastController", ["$scope", "$sce", "$filter", "city", "getWeather", function($scope, $sce, $filter, city, getWeather){
 
 	$scope.isLoading = true;
 	$scope.cityName = city.name;
@@ -114,24 +114,15 @@ weatherApp.controller("forecastController", ["$scope", "$resource", "$sce", "$fi
 
 		$scope.cnt = num || 2;
 
-		var wResource = $resource("https://api.openweathermap.org/data/2.5/forecast/daily?units=metric&lang=hr",
-									{}, { get : { method: "GET" } } );
-
-		var weatherData = wResource.get({ q : $scope.cityName, cnt : $scope.cnt, APPID : "2b6f7645cb308393eb84ed6b1517b425" });
-
-
-		weatherData.$promise
-			.then(function(result){
-				$scope.isLoading = false;
-				$scope.days = result.list;
-				angular.forEach($scope.days, function(day){
-					$scope.data[0].push(day.temp.day);
-					$scope.data[1].push(day.temp.eve);
-					$scope.labels.push($filter('date')($scope.convertToDate(day.dt), "dd.MM.yyyy"));
-				})
-			}, function(error, status){
-				console.log(error.data.message);
+		getWeather.weatherData($scope.cityName, $scope.cnt).then(function(result){
+			$scope.isLoading = false;
+			$scope.days = result;
+			angular.forEach($scope.days, function(day){
+				$scope.data[0].push(day.temp.day);
+				$scope.data[1].push(day.temp.eve);
+				$scope.labels.push($filter('date')($scope.convertToDate(day.dt), "dd.MM.yyyy"));
 			});
+		});
 	};
 
 }]);
