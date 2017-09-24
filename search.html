@@ -1,9 +1,14 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<form ng-submit="submit()" class="form-inline" >
-				<input type="text" class="form-control" ng-model="cityName" placeholder="Enter city name here..." minlength="3" required>
+			<form name="searchForm" ng-submit="submit()" class="form-inline" >
+				<input name="city" type="text" class="form-control" ng-model="cityName" placeholder="Enter city name here..." minlength="3" required>
 				<input type="submit" class="btn btn-primary" value="Get Forecast">
+
+				<div ng-messages="searchForm.city.$error" class="mt-2">
+					<div class="alert alert-warning" ng-message="minlength">City name must have at least 3 letters</div>
+				</div>
+
 			</form>
 		</div>
 	</div>

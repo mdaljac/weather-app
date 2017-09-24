@@ -70,7 +70,6 @@ a.cnt:nth-of-type(2){
 	align-items: center;
 }
 
-
 @media screen and (max-width: 580px){
 	.mySelect{
 		display: none;

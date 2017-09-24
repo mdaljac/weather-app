@@ -1,6 +1,6 @@
 //APIKEY: 2b6f7645cb308393eb84ed6b1517b425
 
-var weatherApp = angular.module("weatherApp", ['ngRoute', 'ngSanitize', 'ngResource', 'chart.js']);
+var weatherApp = angular.module("weatherApp", ['ngRoute', 'ngSanitize', 'ngResource', 'ngMessages', 'chart.js']);
 
 //ROUTES
 
